@@ -1,9 +1,8 @@
-<div class="sensorWidget">
-    {{#each partials.sensors.sensors}}
-    <div class="location">
-        <h3> {{name}} </h3>
-        <p>{{id}}</p>
-        <p>latest_temp</p>
+<div class="sensorWidget">	
+	{{#each partials.sensors.readings}}
+    <div class="sensors">
+        <p>id: {{_id}}</p>
+        <p>value: {{value}}</p>
     </div>
     {{/each}}
     <small> Source: <a href= "http://www.mysensors.com" > Powerd by MySensors</a></small>

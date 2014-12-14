@@ -1,63 +1,29 @@
-var mongo = require('mongoskin');
-var db = mongo.db("mongodb://localhost:27017/MySensorsDb", {
-	native_parser : true
-});
-
-
 var sensors = [ {
 	id : 'Value-3-0',
-	name : 'Sensor 30',
+	name : 'Hönshus',
 }, {
 	id : 'Value-2-0',
-	name : 'Sensor 20',
+	name : 'Garage',
 }, {
 	id : 'Value-2-1',
-	name : 'Sensor 21',
+	name : 'Ute',
 }, {
-	id : 'Value-1-0',
-	name : 'Sensor 2 ',
+	id : 'Value-105-0',
+	name : 'Partiklar',
 }, {
 	id : 'Value-5-0',
-	name : 'Sensor 50',
+	name : 'Panna',
 }, {
 	id : 'Value-5-2',
-	name : 'Sensor 51',
+	name : 'Fram',
 }, {
 	id : 'Value-5-2',
-	name : 'Sensor 52',
+	name : 'Retur',
 }, ];
 
-function getLatestTemp(sensorId) {
-	//var db = req.db;
-	db.collection(sensorId).
-	find().
-	sort({_id : -1}).
-	limit(1).
-	toArray(
-			function(err, items) {
-				res.json(items);
-				}
-			);
-	}
 
 exports.getSensorsNames = function() {
 	return {
 		sensors : sensors,
 	}
 };
-
-exports.getSensorsValues = function() {
-	return {
-		sensors : sensors,
-	}
-};
-
-// exports.getSensorValues = function() {
-// var result =[];
-// sensorNames.forEach(function(element, index, array) {
-// result[result.length] = element.name;
-
-// return sensorNames;
-// };
-// )
-// };
