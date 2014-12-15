@@ -32,11 +32,11 @@ app.use(function(req, res, next) {
 		res.locals.partials.sensors.readings = [];
 	}
 
-	db.collection('Value-2-0').find().sort({_id : -1}).limit(1).
-	toArray(function(err, items) {
-		items[items.length-1].name=sensors.getNodeName('Value-2-0');
-		res.locals.partials.sensors.readings =  items;
-	});
+//	db.collection('Value-2-0').find().sort({_id : -1}).limit(1).
+//	toArray(function(err, items) {
+//		items[items.length-1].name=sensors.getNodeName('Value-2-0');
+//		res.locals.partials.sensors.readings =  items;
+//	});
 
 	var sensorNames = sensors.getSensorsIds();
 

@@ -17,7 +17,7 @@ var sensors = [ {
 	id : 'Value-5-2',
 	name : 'Fram',
 }, {
-	id : 'Value-5-2',
+	id : 'Value-5-1',
 	name : 'Retur',
 }, ];
 
