@@ -26,26 +26,34 @@ var sensors = require('./lib/sensors.js');
 app.use(function(req, res, next) {
 	if (!res.locals.partials){ res.locals.partials = {};
 	res.locals.partials.sensors = {};
-	res.locals.partials.sensors.readings = {};
+	res.locals.partials.sensors.readings = [];
 	}
 
 	db.collection('Value-2-0').find().sort({_id : -1}).limit(1).
-	toArray(
-		function(err, items) {
+	toArray(function(err, items) {
 			res.locals.partials.sensors.readings =  items;
 			console.log("res.locals.partials.sensors");
 			console.log(res.locals.partials.sensors);
 		});
 
-	db.collection('Value-2-1').find().sort({_id : -1}).limit(1).
-	toArray(
-		function(err, items) {
-			res.locals.partials.sensors.readings=res.locals.partials.sensors.readings.concat(items);
-			console.log("res.locals.partials.sensors");
-			console.log(res.locals.partials.sensors);
-		});
-
-
+	var sensorNames = sensors.getSensorsIds();
+	console.log("sensorNames");
+	console.log(sensorNames);
+	console.log("length");
+	console.log(sensorNames.length);
+	
+	for (var int = 0; int < sensorNames.length; int++) {
+		var sensor_name = sensorNames[int];
+		console.log("sensor_name");
+		console.log(sensor_name);
+		
+		db.collection(sensor_name).find().sort({_id : -1}).limit(1).
+		toArray(function(err, items) {
+				res.locals.partials.sensors.readings=res.locals.partials.sensors.readings.concat(items);
+				console.log("res.locals.partials.sensors");
+				console.log(res.locals.partials.sensors);
+			});	
+	}
 
 	console.log("res.locals.partials.sensors");
 	console.log(res.locals.partials.sensors);
