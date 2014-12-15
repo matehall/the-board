@@ -1,0 +1,34 @@
+@CHARSET "ISO-8859-1";
+body {
+	background-color: black;
+}
+
+.sensors {
+	background-color: blue;
+	position: relative;
+	display: inline-block;
+	height: 100px;
+	width: 100px;
+	border-radius: 100%;
+	border: 2px solid black;
+	margin-left: 5px;
+	margin-top: 5px;
+	text-align: center;	
+	font-family: Verdana;
+	font-weight: bold;
+}
+.sensorWidget{
+	border: 2px solid blue;
+	border-radius: 25px;
+	height: auto;
+	width: auto;
+}
+
+small{
+	font-family: Verdana;
+	font-size: small;
+	
+	
+	
+	
+}
