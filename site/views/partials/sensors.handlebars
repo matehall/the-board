@@ -1,8 +1,7 @@
 <div class="sensorWidget">	
 	{{#each partials.sensors.readings}}
     <div class="sensors">
-        <p>id: {{_id}}</p>
-        <p>value: {{value}}</p>
+    	<p>{{name}}: {{value}}</p>
     </div>
     {{/each}}
     <small> Source: <a href= "http://www.mysensors.com" > Powerd by MySensors</a></small>

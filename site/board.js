@@ -31,38 +31,48 @@ app.use(function(req, res, next) {
 
 	db.collection('Value-2-0').find().sort({_id : -1}).limit(1).
 	toArray(function(err, items) {
-			res.locals.partials.sensors.readings =  items;
-			console.log("res.locals.partials.sensors");
-			console.log(res.locals.partials.sensors);
-		});
+//		console.log("items");
+//		console.log(items);
+		items[items.length-1].name=sensors.getNodeName('Value-2-0');
+		res.locals.partials.sensors.readings =  items;
+//		console.log("items");
+//		console.log(items);
+	});
 
 	var sensorNames = sensors.getSensorsIds();
-	console.log("sensorNames");
-	console.log(sensorNames);
-	console.log("length");
-	console.log(sensorNames.length);
-	
+//	console.log("sensorNames");
+//	console.log(sensorNames);
+//	console.log("length");
+//	console.log(sensorNames.length);
+
 	for (var int = 0; int < sensorNames.length; int++) {
 		var sensor_name = sensorNames[int];
-		console.log("sensor_name");
-		console.log(sensor_name);
-		
+//		console.log("sensor_name");
+//		console.log(sensor_name);
+
 		db.collection(sensor_name).find().sort({_id : -1}).limit(1).
-		toArray(function(err, items) {
+		toArray(function(sensor_name){
+			return function(err, items) {
+//				console.log("callback sensor_name");
+//				console.log(sensor_name);
+				items[items.length - 1].name = sensors.getNodeName(sensor_name);
+
 				res.locals.partials.sensors.readings=res.locals.partials.sensors.readings.concat(items);
-				console.log("res.locals.partials.sensors");
-				console.log(res.locals.partials.sensors);
-			});	
+//				console.log("res.locals.partials.sensors");
+//				console.log(res.locals.partials.sensors);
+			}
+		}(sensor_name)
+		);	
 	}
 
-	console.log("res.locals.partials.sensors");
-	console.log(res.locals.partials.sensors);
+//	console.log("res.locals.partials.sensors");
+//	console.log(res.locals.partials.sensors);
 	next();
 });
 
 app.use(function(req, res, next) {
 	if (!res.locals.partials) res.locals.partials = {};
-	
+
 	console.log("Partial")
 	console.log(res.locals.partials);
 
@@ -79,19 +89,19 @@ app.get('/about', function(req, res) {
 	});
 })
 
-//	var db = req.db;
-	// res.send('test');
+//var db = req.db;
+//res.send('test');
 app.get('/temp_2', function(req, res) {
 	db.collection('Value-2-1').find().sort({
 		_id : -1
 	}).limit(3).toArray(function(err, items) {
 		if(err) throw err
-	//	console.log("temp2:" + items);
+		//	console.log("temp2:" + items);
 		res.send(items);
 	});
 })
 
-// custom 404 page
+//custom 404 page
 app.use(function(req, res) {
 	res.status(404);
 	res.render('404');
